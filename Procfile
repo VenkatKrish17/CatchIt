@@ -1,1 +1,1 @@
-web: ionic serve
+web: ionic serve --port process.env.PORT --no-livereload
