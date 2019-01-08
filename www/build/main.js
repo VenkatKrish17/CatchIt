@@ -658,19 +658,19 @@ var map = {
 		4
 	],
 	"../pages/host-login/host-login.module": [
-		445,
+		446,
 		3
 	],
 	"../pages/host/host.module": [
-		446,
+		447,
 		2
 	],
 	"../pages/join/join.module": [
-		447,
+		448,
 		1
 	],
 	"../pages/leader-board/leader-board.module": [
-		448,
+		445,
 		0
 	]
 };
@@ -720,7 +720,7 @@ var LoginServiceProvider = /** @class */ (function () {
         console.log('Hello LoginServiceProvider Provider');
     }
     LoginServiceProvider.prototype.login = function (formData) {
-        return this.http.post('http://192.168.50.34:3000/user/', formData);
+        return this.http.post('https://catchitbackend.herokuapp.com/user/', formData);
     };
     LoginServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
@@ -859,10 +859,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/host-live/host-live.module#HostLivePageModule', name: 'HostLivePage', segment: 'host-live', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/leader-board/leader-board.module#LeaderBoardPageModule', name: 'LeaderBoardPage', segment: 'leader-board', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/host-login/host-login.module#HostLoginPageModule', name: 'HostLoginPage', segment: 'host-login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/host/host.module#HostPageModule', name: 'HostPage', segment: 'host', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/join/join.module#JoinPageModule', name: 'JoinPage', segment: 'join', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/leader-board/leader-board.module#LeaderBoardPageModule', name: 'LeaderBoardPage', segment: 'leader-board', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/game/game.module#GamePageModule', name: 'GamePage', segment: 'game', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -1582,20 +1582,20 @@ var GameServiceProvider = /** @class */ (function () {
     };
     GameServiceProvider.prototype.startGame = function (gameInfo) {
         console.log(gameInfo);
-        return this.http.post('http://192.168.50.34:3000/game/', gameInfo);
+        return this.http.post('https://catchitbackend.herokuapp.com/game/', gameInfo);
     };
     GameServiceProvider.prototype.stopGame = function (game_code) {
         console.log(game_code);
-        return this.http.post("http://192.168.50.34:3000/stop_game/", { "game_code": game_code });
+        return this.http.post("https://catchitbackend.herokuapp.com/stop_game/", { "game_code": game_code });
     };
     GameServiceProvider.prototype.getActiveGame = function (playerGameInfo) {
-        return this.http.post("http://192.168.50.34:3000/get_game/", playerGameInfo);
+        return this.http.post("https://catchitbackend.herokuapp.com/get_game/", playerGameInfo);
     };
     GameServiceProvider.prototype.getPlayers = function (gameCode) {
-        return this.http.get('http://192.168.50.34:3000/players/' + gameCode);
+        return this.http.get('https://catchitbackend.herokuapp.com/players/' + gameCode);
     };
     GameServiceProvider.prototype.putScore = function (playerInfo) {
-        return this.http.post("http://192.168.50.34:3000/score", playerInfo);
+        return this.http.post("https://catchitbackend.herokuapp.com/score", playerInfo);
     };
     GameServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
