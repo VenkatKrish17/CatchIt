@@ -1,0 +1,34 @@
+<!--
+  Generated template for the JoinPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Brace Yourself !! </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form (ngSubmit)="startGame()" #startForm="ngForm">
+<ion-list>
+  <ion-item>
+    <ion-label fixed>Nick Name </ion-label>
+    <ion-input type="text" value="" id="nick_name" name="nick_name" [(ngModel)]="nick_name" pattern="[A-Za-z0-9]{4,6}" required ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>Game ID</ion-label>
+    <ion-input type="text" value="" id="game_code" name="game_code" [(ngModel)]="game_code" pattern="[0-9]{6}" required ></ion-input>
+  </ion-item>
+  <ion-item>
+  <button ion-button class="submit-btn" full type="submit"  [disabled]="!startForm.form.valid" > Let's Play</button>
+  </ion-item>
+  </ion-list>
+  </form>
+
+
+</ion-content>

@@ -1,0 +1,21 @@
+page-game {
+    ::-webkit-scrollbar{
+        display:none;
+        }
+    h3,h1{
+      border:0.5x solid black;
+      width:20%;
+      height:auto; 
+      margin-left:40%;
+      text-align: center; 
+      display:inline-block;
+    }
+    
+    
+    .found{
+        background:#4CAF50;
+    }
+    .notfound{
+        background: #f44336;
+    }
+}
