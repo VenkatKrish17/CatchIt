@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 448:
+/***/ 445:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GamePageModule", function() { return GamePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HostLivePageModule", function() { return HostLivePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__host_live__ = __webpack_require__(142);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var GamePageModule = /** @class */ (function () {
-    function GamePageModule() {
+var HostLivePageModule = /** @class */ (function () {
+    function HostLivePageModule() {
     }
-    GamePageModule = __decorate([
+    HostLivePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__game__["a" /* GamePage */],
+                __WEBPACK_IMPORTED_MODULE_2__host_live__["a" /* HostLivePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__game__["a" /* GamePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__host_live__["a" /* HostLivePage */]),
             ],
         })
-    ], GamePageModule);
-    return GamePageModule;
+    ], HostLivePageModule);
+    return HostLivePageModule;
 }());
 
-//# sourceMappingURL=game.module.js.map
+//# sourceMappingURL=host-live.module.js.map
 
 /***/ })
 

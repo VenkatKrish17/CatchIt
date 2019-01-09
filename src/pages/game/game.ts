@@ -4,6 +4,7 @@ import {MobileNet} from '../../tf_utils/mobilenet';
 import * as tfc from '@tensorflow/tfjs-core';
 import {GameServiceProvider} from "../../providers/game-service/game-service";
 import { LeaderBoardPage } from '../leader-board/leader-board';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the GamePage page.
@@ -36,10 +37,11 @@ export class GamePage {
   current_time:Date;
   gameInfo={}
   duration:Number;
+  stream:any;
   timer=null;
   objects_found=0;
   timerbox:HTMLButtonElement;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public gameService:GameServiceProvider) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController,public navParams: NavParams, public gameService:GameServiceProvider) {
     this.model=new MobileNet()
     console.log(this.model)
     console.log(this.gameInfo)
@@ -71,19 +73,29 @@ export class GamePage {
 
   }
   stopGame(){
-    alert("Well played ! Game Over !! ")
+      console.log(this.stream)
+      this.stream.stop()
+      this.videoElement.pause();
+      this.isRunning=false;
+      let alert = this.alertCtrl.create({
+        title: 'Time Up!!',
+        subTitle: "Well done ! ",
+        buttons: ['Dismiss']
+      });
+      alert.present();
     this.gameService.getPlayers(this.gameInfo['game_code']).subscribe(resp=>{
       if(resp["status"]){
         this.navCtrl.setRoot(LeaderBoardPage, {data:resp["data"]}, {animate: true, direction: 'forward'});
       }
       else{
-        alert("Some error occured")
+       window.alert("Some error occured")
       }
       
     })
+    
    
   }
-  refreshData(){
+ async refreshData(){
     this.current_time=new Date()
     console.log(this.current_time)
     let difference =(this.current_time.getTime()-this.start_time.getTime())/1000
@@ -167,13 +179,13 @@ getColor(bool){
   validateAndUpdate(topK){
     for(let i=0;i<topK.length;i++){
       let index=this.objectsnamelist.indexOf(topK[i].label.toLowerCase())
-
-      console.log(topK[i].label)
       if(index>=0){
-        this.objectsnamelist.splice(index,1)
-        this.objects_found+=1;
-        this.objectslist[index].found=true;
-        this.updateScore()
+        if(!this.objectslist[index].found){
+          this.objects_found+=1;
+          this.objectslist[index].found=true;
+          this.updateScore()
+        }
+       
       }
     }
 
@@ -240,8 +252,17 @@ getColor(bool){
       if(this.isMobile()){
         navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
     .then(function(stream) {
-      console.log(stream)
-      console.log(that.videoElement)
+      stream.stop = function () {
+        this.getAudioTracks().forEach(function (track) {
+            track.stop();
+        });
+        this.getVideoTracks().forEach(function (track) { //in case... :)
+            track.stop();
+        });
+    };
+      that.stream=stream;
+      // console.log(stream)
+      // console.log(that.videoElement)
       that.videoElement['srcObject'] = stream;
       Promise.all([
         that.model.load().then(() => that.warmUpModel()),
@@ -269,8 +290,17 @@ getColor(bool){
       else{
     navigator.mediaDevices.getUserMedia({video: true})
     .then(function(stream) {
-      console.log(stream)
-      console.log(that.videoElement)
+      stream.stop = function () {
+        console.log("Stopping the video tracks")
+        this.getAudioTracks().forEach(function (track) {
+            track.stop();
+        });
+        this.getVideoTracks().forEach(function (track) { //in case... :)
+            track.stop();
+        });
+    };
+      that.stream=stream;
+      // console.log(that.videoElement)
       that.videoElement['srcObject'] = stream;
       Promise.all([
         that.model.load().then(() => that.warmUpModel()),

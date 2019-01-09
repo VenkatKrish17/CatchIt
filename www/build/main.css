@@ -25722,3 +25722,8 @@ page-game .notfound {
 page-host h1 {
   text-align: center;
 }
+
+page-host-live #timer {
+  text-align: center;
+  border: 1px dotted blueviolet;
+}

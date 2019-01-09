@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -10,15 +10,18 @@ import { Observable } from 'rxjs/Observable';
 */
 @Injectable()
 export class LoginServiceProvider {
-
+  // url="https://catchitbackend.herokuapp.com"
+  url="http://localhost:3000"
   constructor(public http: HttpClient) {
     console.log('Hello LoginServiceProvider Provider');
   }
 
   login(formData:any):Observable<any>{
-    return this.http.post('https://catchitbackend.herokuapp.com/user/',formData)
+    return this.http.post(this.url+'/login/',formData)
     }
-  
+    register(formData:any):Observable<any>{
+      return this.http.post(this.url+'/user/',formData)
+      }
 
   // login(data){
   //   console.log("Sending..")

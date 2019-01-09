@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {LoginServiceProvider} from "../../providers/login-service/login-service"
 import {HostPage} from "../host/host"
+import {RegisterPage} from "../register/register"
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the HostLoginPage page.
  *
@@ -16,26 +18,36 @@ import {HostPage} from "../host/host"
   providers:[LoginServiceProvider]
 })
 export class HostLoginPage {
-  registerCredentials = { 'userid': '', 'password': '' };
-  constructor(public navCtrl: NavController,public loginServiceProvider:LoginServiceProvider, public navParams: NavParams) {
+  loginCredentials = { 'userid': '', 'password': '' };
+  constructor(public navCtrl: NavController,private alertCtrl: AlertController,public loginServiceProvider:LoginServiceProvider, public navParams: NavParams) {
   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HostLoginPage');
   }
-
-  login_or_register(){
-    console.log(this.registerCredentials)
+  regpage(){
+    this.navCtrl.push(RegisterPage)
+  }
+  login(){
+    console.log(this.loginCredentials)
     // let formData=new FormData()
-    // formData.append("userid",this.registerCredentials.userid)
-    // formData.append("password",this.registerCredentials.password)
-    this.loginServiceProvider.login(this.registerCredentials).subscribe(resp => {
+    // formData.append("userid",this.loginCredentials.userid)
+    // formData.append("password",this.loginCredentials.password)
+    this.loginServiceProvider.login(this.loginCredentials).subscribe(resp => {
       console.log(resp)
       if(resp["status"]){
-        this.navCtrl.push(HostPage,{
+        this.navCtrl.setRoot(HostPage,{
           data:resp
         })
+      }
+      else{
+        let alert = this.alertCtrl.create({
+          title: 'Aiyoh !',
+          subTitle: resp["message"],
+          buttons: ['Dismiss']
+        });
+        alert.present();
       }
     })
     

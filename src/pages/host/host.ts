@@ -43,7 +43,7 @@ export class HostPage {
       this.gameService.startGame(this.gameObj).subscribe(resp => {
         console.log(resp)
         if(resp["status"]){
-          this.navCtrl.push(HostLivePage,{
+          this.navCtrl.setRoot(HostLivePage,{
             'data':resp
           })
         }

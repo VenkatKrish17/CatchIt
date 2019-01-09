@@ -12,6 +12,7 @@ import { HostLivePage } from '../pages/host-live/host-live';
 import { JoinPage } from '../pages/join/join';
 import { GamePage } from '../pages/game/game';
 import {LeaderBoardPage} from '../pages/leader-board/leader-board';
+import {RegisterPage} from '../pages/register/register';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { GameServiceProvider } from '../providers/game-service/game-service';
 
@@ -25,7 +26,8 @@ import { GameServiceProvider } from '../providers/game-service/game-service';
     GamePage,
     HostLoginPage,
     HostLivePage,
-    LeaderBoardPage
+    LeaderBoardPage,
+    RegisterPage
    
   ],
   imports: [
@@ -42,7 +44,8 @@ import { GameServiceProvider } from '../providers/game-service/game-service';
     GamePage,
     HostLoginPage,
     HostLivePage,
-    LeaderBoardPage
+    LeaderBoardPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

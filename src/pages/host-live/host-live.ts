@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GameServiceProvider} from "../../providers/game-service/game-service";
 import {LeaderBoardPage} from "../leader-board/leader-board"
+import { HomePage } from '../home/home';
 /**
  * Generated class for the HostLivePage page.
  *
@@ -38,12 +39,17 @@ export class HostLivePage {
     this.gameService.stopGame(this.gameInfo['game_code']).subscribe(resp=>{
       console.log(resp)
     })
-    this.navCtrl.push(LeaderBoardPage
+    this.navCtrl.setRoot(LeaderBoardPage
     ,{"data":this.players})
 
 
 
   }
+
+  gohome(){
+    this.navCtrl.setRoot(HomePage)
+  }
+
   refreshData(){
     this.current_time=new Date()
     let difference =(this.current_time.getTime()-this.start_time.getTime())/1000
@@ -60,6 +66,11 @@ export class HostLivePage {
   refreshPlayers(){
     this.gameService.getPlayers(this.gameInfo['game_code']).subscribe(resp=>{
       this.players=resp['data']
+
+      this.players.sort(function(a,b){
+        return b.score - a.score
+      })
+
       console.log(this.players)
     })
     if(this.countdown==0){

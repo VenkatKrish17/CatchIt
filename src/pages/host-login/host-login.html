@@ -7,24 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login/Sign up</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<form (ngSubmit)="login_or_register()" #registerForm="ngForm">
+<form (ngSubmit)="login()" #loginForm="ngForm">
       <ion-row>
         <ion-col>
           <ion-list inset>
             
             <ion-item>
-              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="registerCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>
+              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="loginCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>
             </ion-item>
             
             <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="loginCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>
             </ion-item>
             
           </ion-list>
@@ -32,9 +32,10 @@
       </ion-row>
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login/Register</button>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
         </ion-col>
       </ion-row>
       
     </form>
+     <button ion-button outline full (click)="regpage()">Register</button>
 </ion-content>
