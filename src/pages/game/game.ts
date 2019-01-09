@@ -90,7 +90,7 @@ export class GamePage {
     let countdown=parseInt(""+(parseInt(""+this.duration)*60-difference))
     this.timerbox.innerHTML=""+countdown
     console.log(difference)
-    if(countdown==0){
+    if(countdown==0 || countdown<0){
       this.updateScore()
       clearInterval(this.timer)
       this.stopGame();
