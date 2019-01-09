@@ -10,8 +10,8 @@ import { Observable } from 'rxjs/Observable';
 */
 @Injectable()
 export class GameServiceProvider {
-  // url="https://catchitbackend.herokuapp.com"
-  url="http://localhost:3000"
+   url="https://catchitbackend.herokuapp.com"
+  //url="http://localhost:3000"
   allObjects=['mobile','cup','bottle','pen','cellphone','pencil','laptop','mouse','keyboard','sunglasses']
   constructor(public http: HttpClient) {
     console.log('Hello GameServiceProvider Provider');

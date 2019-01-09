@@ -74,7 +74,7 @@ export class GamePage {
   }
   stopGame(){
       console.log(this.stream)
-      this.stream.stop()
+      this.stream.getTracks().forEach(track => track.stop())
       this.videoElement.pause();
       this.isRunning=false;
       let alert = this.alertCtrl.create({
@@ -252,14 +252,7 @@ getColor(bool){
       if(this.isMobile()){
         navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
     .then(function(stream) {
-      stream.stop = function () {
-        this.getAudioTracks().forEach(function (track) {
-            track.stop();
-        });
-        this.getVideoTracks().forEach(function (track) { //in case... :)
-            track.stop();
-        });
-    };
+      
       that.stream=stream;
       // console.log(stream)
       // console.log(that.videoElement)
@@ -290,15 +283,6 @@ getColor(bool){
       else{
     navigator.mediaDevices.getUserMedia({video: true})
     .then(function(stream) {
-      stream.stop = function () {
-        console.log("Stopping the video tracks")
-        this.getAudioTracks().forEach(function (track) {
-            track.stop();
-        });
-        this.getVideoTracks().forEach(function (track) { //in case... :)
-            track.stop();
-        });
-    };
       that.stream=stream;
       // console.log(that.videoElement)
       that.videoElement['srcObject'] = stream;
