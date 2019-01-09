@@ -232,13 +232,42 @@ getColor(bool){
     this.timerbox = <HTMLButtonElement> document.getElementById("timer")
     console.log(this.videoElement)
     let that=this;
-    alert(this.isMobile())
+    //alert(this.isMobile())
     if(!this.isMobile()){
       this.videoElement.classList.add("camera-front-facing")
     }
-    if (navigator.mediaDevices.getUserMedia) {       
-      navigator.mediaDevices.getUserMedia({video: true})
-    
+    if (navigator.mediaDevices.getUserMedia) {
+      if(this.isMobile()){
+        navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
+    .then(function(stream) {
+      console.log(stream)
+      console.log(that.videoElement)
+      that.videoElement['srcObject'] = stream;
+      Promise.all([
+        that.model.load().then(() => that.warmUpModel()),
+        that.setupCamera().then((value: CameraDimentions) => {
+          that.setupVideoDimensions(value[0], value[1]);
+        }),
+      ]).then(values => {
+        // Both the MobileNet and the camera has been loaded.
+        // We can start the game by starting the predict engine and showing the
+        // game countdown.
+        // NOTE the predict engine will only do calculations if game.isRunning
+        // is set to true. We trigger that inside our countdown Promise.
+        that.isRunning = true;
+        //console.log(that)
+        that.current_time=new Date();
+        that.timer=setInterval(()=>{that.refreshData()},1000)
+        that.predict();
+      })
+    })
+    .catch(function(error) {
+      console.log(error)
+      console.log("Something went wrong!");
+    });
+      }     
+      else{
+    navigator.mediaDevices.getUserMedia({video: true})
     .then(function(stream) {
       console.log(stream)
       console.log(that.videoElement)
@@ -265,6 +294,7 @@ getColor(bool){
       console.log(error)
       console.log("Something went wrong!");
     });
+  }
   }
   }
 

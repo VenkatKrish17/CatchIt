@@ -105,159 +105,10 @@ var HostLivePage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostLoginPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_host__ = __webpack_require__(142);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the HostLoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HostLoginPage = /** @class */ (function () {
-    function HostLoginPage(navCtrl, loginServiceProvider, navParams) {
-        this.navCtrl = navCtrl;
-        this.loginServiceProvider = loginServiceProvider;
-        this.navParams = navParams;
-        this.registerCredentials = { 'userid': '', 'password': '' };
-    }
-    HostLoginPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HostLoginPage');
-    };
-    HostLoginPage.prototype.login_or_register = function () {
-        var _this = this;
-        console.log(this.registerCredentials);
-        // let formData=new FormData()
-        // formData.append("userid",this.registerCredentials.userid)
-        // formData.append("password",this.registerCredentials.password)
-        this.loginServiceProvider.login(this.registerCredentials).subscribe(function (resp) {
-            console.log(resp);
-            if (resp["status"]) {
-                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__host_host__["a" /* HostPage */], {
-                    data: resp
-                });
-            }
-        });
-    };
-    HostLoginPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-host-login',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/'<!--\n  Generated template for the HostLoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Login/Sign up</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="login_or_register()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="registerCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login/Register</button>\n        </ion-col>\n      </ion-row>\n      \n    </form>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/,
-            providers: [__WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */]]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], HostLoginPage);
-    return HostLoginPage;
-}());
-
-//# sourceMappingURL=host-login.js.map
-
-/***/ }),
-
-/***/ 142:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_live_host_live__ = __webpack_require__(140);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * Generated class for the HostPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HostPage = /** @class */ (function () {
-    function HostPage(navCtrl, navParams, gameService, alertCtrl) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.gameService = gameService;
-        this.alertCtrl = alertCtrl;
-        this.gameObj = { 'game_code': null, 'duration': "5", 'objects': [], 'hosted_by': null };
-        this.user = null;
-        this.allObjects = [];
-        this.gameObj.hosted_by = this.navParams.get("data")["userid"];
-        this.allObjects = this.gameService.getAllObjects();
-    }
-    HostPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HostPage');
-    };
-    HostPage.prototype.host_game = function () {
-        var _this = this;
-        if (this.gameObj.objects.length < 3) {
-            var alert_1 = this.alertCtrl.create({
-                title: 'Aiyoh !! ',
-                subTitle: 'Too Few Objects for the game! ',
-                buttons: ['Add More']
-            });
-            alert_1.present();
-        }
-        else {
-            this.gameService.startGame(this.gameObj).subscribe(function (resp) {
-                console.log(resp);
-                if (resp["status"]) {
-                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__host_live_host_live__["a" /* HostLivePage */], {
-                        'data': resp
-                    });
-                }
-                else {
-                    console.log(resp["message"]);
-                }
-            });
-        }
-    };
-    HostPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-host',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host\host.html"*/'<!--\n  Generated template for the HostPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Welcome <span id="userid"></span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="host_game()" #gameForm="ngForm">\n      <ion-row>\n        <ion-col>\n      <ion-list radio-group [(ngModel)]="gameObj.duration" name="duration" class="item">\n            <ion-list-header>\n                Duration ?\n            </ion-list-header>\n            <ion-item>\n                    <ion-radio value="5" checked></ion-radio>\n                    <ion-label>5 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="10"></ion-radio>\n                    <ion-label>10 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="20"></ion-radio>\n                    <ion-label>20 Mins</ion-label>\n            </ion-item>\n      </ion-list>\n      </ion-col>\n      </ion-row>\n      <ion-row>\n      <ion-col>\n      <ion-item>\n       <ion-label>Select Objects</ion-label>\n      <ion-select [(ngModel)]="gameObj.objects" name="objects" okText="Okay" cancelText="Dismiss" multiple="true">\n      <ion-option *ngFor="let member of allObjects" [value]="member">{{member}}</ion-option>\n      </ion-select>\n    </ion-item>\n    </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" >Start !</button>\n        </ion-col>\n    \n      </ion-row>\n      \n    </form>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host\host.html"*/,
-            providers: [__WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */]]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
-    ], HostPage);
-    return HostPage;
-}());
-
-//# sourceMappingURL=host.js.map
-
-/***/ }),
-
-/***/ 143:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JoinPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game_game__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game_game__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_game_service_game_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -321,7 +172,7 @@ var JoinPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 144:
+/***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -628,6 +479,155 @@ var GamePage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 143:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostLoginPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_host__ = __webpack_require__(144);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the HostLoginPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HostLoginPage = /** @class */ (function () {
+    function HostLoginPage(navCtrl, loginServiceProvider, navParams) {
+        this.navCtrl = navCtrl;
+        this.loginServiceProvider = loginServiceProvider;
+        this.navParams = navParams;
+        this.registerCredentials = { 'userid': '', 'password': '' };
+    }
+    HostLoginPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HostLoginPage');
+    };
+    HostLoginPage.prototype.login_or_register = function () {
+        var _this = this;
+        console.log(this.registerCredentials);
+        // let formData=new FormData()
+        // formData.append("userid",this.registerCredentials.userid)
+        // formData.append("password",this.registerCredentials.password)
+        this.loginServiceProvider.login(this.registerCredentials).subscribe(function (resp) {
+            console.log(resp);
+            if (resp["status"]) {
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__host_host__["a" /* HostPage */], {
+                    data: resp
+                });
+            }
+        });
+    };
+    HostLoginPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-host-login',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/'<!--\n  Generated template for the HostLoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Login/Sign up</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="login_or_register()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="registerCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login/Register</button>\n        </ion-col>\n      </ion-row>\n      \n    </form>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */]]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    ], HostLoginPage);
+    return HostLoginPage;
+}());
+
+//# sourceMappingURL=host-login.js.map
+
+/***/ }),
+
+/***/ 144:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_live_host_live__ = __webpack_require__(140);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the HostPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HostPage = /** @class */ (function () {
+    function HostPage(navCtrl, navParams, gameService, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.gameService = gameService;
+        this.alertCtrl = alertCtrl;
+        this.gameObj = { 'game_code': null, 'duration': "5", 'objects': [], 'hosted_by': null };
+        this.user = null;
+        this.allObjects = [];
+        this.gameObj.hosted_by = this.navParams.get("data")["userid"];
+        this.allObjects = this.gameService.getAllObjects();
+    }
+    HostPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HostPage');
+    };
+    HostPage.prototype.host_game = function () {
+        var _this = this;
+        if (this.gameObj.objects.length < 3) {
+            var alert_1 = this.alertCtrl.create({
+                title: 'Aiyoh !! ',
+                subTitle: 'Too Few Objects for the game! ',
+                buttons: ['Add More']
+            });
+            alert_1.present();
+        }
+        else {
+            this.gameService.startGame(this.gameObj).subscribe(function (resp) {
+                console.log(resp);
+                if (resp["status"]) {
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__host_live_host_live__["a" /* HostLivePage */], {
+                        'data': resp
+                    });
+                }
+                else {
+                    console.log(resp["message"]);
+                }
+            });
+        }
+    };
+    HostPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-host',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host\host.html"*/'<!--\n  Generated template for the HostPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Welcome <span id="userid"></span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="host_game()" #gameForm="ngForm">\n      <ion-row>\n        <ion-col>\n      <ion-list radio-group [(ngModel)]="gameObj.duration" name="duration" class="item">\n            <ion-list-header>\n                Duration ?\n            </ion-list-header>\n            <ion-item>\n                    <ion-radio value="5" checked></ion-radio>\n                    <ion-label>5 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="10"></ion-radio>\n                    <ion-label>10 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="20"></ion-radio>\n                    <ion-label>20 Mins</ion-label>\n            </ion-item>\n      </ion-list>\n      </ion-col>\n      </ion-row>\n      <ion-row>\n      <ion-col>\n      <ion-item>\n       <ion-label>Select Objects</ion-label>\n      <ion-select [(ngModel)]="gameObj.objects" name="objects" okText="Okay" cancelText="Dismiss" multiple="true">\n      <ion-option *ngFor="let member of allObjects" [value]="member">{{member}}</ion-option>\n      </ion-select>\n    </ion-item>\n    </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" >Start !</button>\n        </ion-col>\n    \n      </ion-row>\n      \n    </form>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host\host.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */]]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], HostPage);
+    return HostPage;
+}());
+
+//# sourceMappingURL=host.js.map
+
+/***/ }),
+
 /***/ 155:
 /***/ (function(module, exports) {
 
@@ -650,7 +650,7 @@ webpackEmptyAsyncContext.id = 155;
 
 var map = {
 	"../pages/game/game.module": [
-		449,
+		448,
 		5
 	],
 	"../pages/host-live/host-live.module": [
@@ -658,15 +658,15 @@ var map = {
 		4
 	],
 	"../pages/host-login/host-login.module": [
-		446,
+		447,
 		3
 	],
 	"../pages/host/host.module": [
-		447,
+		449,
 		2
 	],
 	"../pages/join/join.module": [
-		448,
+		446,
 		1
 	],
 	"../pages/leader-board/leader-board.module": [
@@ -690,7 +690,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 198:
+/***/ 234:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -740,8 +740,8 @@ var LoginServiceProvider = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__host_login_host_login__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__join_join__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__host_login_host_login__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__join_join__ = __webpack_require__(141);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -808,13 +808,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(443);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_host_host__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_host_login_host_login__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_host_host__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_host_login_host_login__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_host_live_host_live__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_join_join__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_game_game__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_join_join__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_game_game__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_leader_board_leader_board__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_login_service_login_service__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_login_service_login_service__ = __webpack_require__(234);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_game_service_game_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -860,10 +860,10 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/host-live/host-live.module#HostLivePageModule', name: 'HostLivePage', segment: 'host-live', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/leader-board/leader-board.module#LeaderBoardPageModule', name: 'LeaderBoardPage', segment: 'leader-board', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/host-login/host-login.module#HostLoginPageModule', name: 'HostLoginPage', segment: 'host-login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/host/host.module#HostPageModule', name: 'HostPage', segment: 'host', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/join/join.module#JoinPageModule', name: 'JoinPage', segment: 'join', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/game/game.module#GamePageModule', name: 'GamePage', segment: 'game', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/host-login/host-login.module#HostLoginPageModule', name: 'HostLoginPage', segment: 'host-login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/game/game.module#GamePageModule', name: 'GamePage', segment: 'game', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/host/host.module#HostPageModule', name: 'HostPage', segment: 'host', priority: 'low', defaultHistory: [] }
                     ]
                 }),
             ],
