@@ -40,7 +40,7 @@ export class GamePage {
   stream:any;
   timer=null;
   objects_found=0;
-  timerbox:HTMLButtonElement;
+  // timerbox:HTMLButtonElement;
   constructor(public navCtrl: NavController, private alertCtrl: AlertController,public navParams: NavParams, public gameService:GameServiceProvider) {
     this.model=new MobileNet()
     console.log(this.model)
@@ -96,11 +96,11 @@ export class GamePage {
    
   }
  async refreshData(){
-    this.current_time=new Date()
+    // this.current_time=new Date()
     console.log(this.current_time)
     let difference =(this.current_time.getTime()-this.start_time.getTime())/1000
     let countdown=parseInt(""+(parseInt(""+this.duration)*60-difference))
-    this.timerbox.innerHTML=""+countdown
+    // this.timerbox.innerHTML=""+countdown
     console.log(difference)
     if(countdown==0 || countdown<0){
       this.updateScore()
@@ -185,6 +185,15 @@ getColor(bool){
           this.objectslist[index].found=true;
           this.updateScore()
         }
+        if(this.objects_found==this.objectsnamelist.length){
+          let alert = this.alertCtrl.create({
+            title: 'Amazing !!',
+            subTitle: "You Caught everything! ",
+            buttons: ['Okay']
+          });
+          alert.present();
+          this.stopGame()
+        }
        
       }
     }
@@ -241,7 +250,7 @@ getColor(bool){
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
     this.videoElement=<HTMLVideoElement> document.getElementById("videoelement")
-    this.timerbox = <HTMLButtonElement> document.getElementById("timer")
+    // this.timerbox = <HTMLButtonElement> document.getElementById("timer")
     console.log(this.videoElement)
     let that=this;
     //alert(this.isMobile())

@@ -1,11 +1,11 @@
 webpackJsonp([7],{
 
-/***/ 105:
+/***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -25,15 +25,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
   and Angular DI.
 */
 var LoginServiceProvider = /** @class */ (function () {
+    //url="http://localhost:3000"
     function LoginServiceProvider(http) {
         this.http = http;
+        this.url = "https://catchitbackend.herokuapp.com";
         console.log('Hello LoginServiceProvider Provider');
     }
     LoginServiceProvider.prototype.login = function (formData) {
-        return this.http.post('https://catchitbackend.herokuapp.com/login/', formData);
+        return this.http.post(this.url + '/login/', formData);
     };
     LoginServiceProvider.prototype.register = function (formData) {
-        return this.http.post('https://catchitbackend.herokuapp.com/user/', formData);
+        return this.http.post(this.url + '/user/', formData);
     };
     LoginServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
@@ -46,15 +48,16 @@ var LoginServiceProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 142:
+/***/ 143:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostLivePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__leader_board_leader_board__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__leader_board_leader_board__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(66);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64,6 +67,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -91,7 +95,10 @@ var HostLivePage = /** @class */ (function () {
         this.gameService.stopGame(this.gameInfo['game_code']).subscribe(function (resp) {
             console.log(resp);
         });
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__leader_board_leader_board__["a" /* LeaderBoardPage */], { "data": this.players });
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__leader_board_leader_board__["a" /* LeaderBoardPage */], { "data": this.players });
+    };
+    HostLivePage.prototype.gohome = function () {
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
     };
     HostLivePage.prototype.refreshData = function () {
         this.current_time = new Date();
@@ -109,6 +116,9 @@ var HostLivePage = /** @class */ (function () {
         var _this = this;
         this.gameService.getPlayers(this.gameInfo['game_code']).subscribe(function (resp) {
             _this.players = resp['data'];
+            _this.players.sort(function (a, b) {
+                return b.score - a.score;
+            });
             console.log(_this.players);
         });
         if (this.countdown == 0) {
@@ -147,15 +157,15 @@ var HostLivePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 143:
+/***/ 144:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_live_host_live__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_live_host_live__ = __webpack_require__(143);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -194,12 +204,12 @@ var HostPage = /** @class */ (function () {
     HostPage.prototype.host_game = function () {
         var _this = this;
         if (this.gameObj.objects.length < 3) {
-            var alert = this.alertCtrl.create({
+            var alert_1 = this.alertCtrl.create({
                 title: 'Aiyoh !! ',
                 subTitle: 'Too Few Objects for the game! ',
                 buttons: ['Add More']
             });
-            alert.present();
+            alert_1.present();
         }
         else {
             this.gameService.startGame(this.gameObj).subscribe(function (resp) {
@@ -220,25 +230,24 @@ var HostPage = /** @class */ (function () {
             selector: 'page-host',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host\host.html"*/'<!--\n  Generated template for the HostPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Welcome <span id="userid"></span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="host_game()" #gameForm="ngForm">\n      <ion-row>\n        <ion-col>\n      <ion-list radio-group [(ngModel)]="gameObj.duration" name="duration" class="item">\n            <ion-list-header>\n                Duration ?\n            </ion-list-header>\n             <ion-item>\n                    <ion-radio value="3" checked></ion-radio>\n                    <ion-label>3 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="5" checked></ion-radio>\n                    <ion-label>5 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="10"></ion-radio>\n                    <ion-label>10 Mins</ion-label>\n            </ion-item>\n            <ion-item>\n                    <ion-radio value="20"></ion-radio>\n                    <ion-label>20 Mins</ion-label>\n            </ion-item>\n      </ion-list>\n      </ion-col>\n      </ion-row>\n      <ion-row>\n      <ion-col>\n      <ion-item>\n       <ion-label>Select Objects</ion-label>\n      <ion-select [(ngModel)]="gameObj.objects" name="objects" okText="Okay" cancelText="Dismiss" multiple="true">\n      <ion-option *ngFor="let member of allObjects" [value]="member">{{member}}</ion-option>\n      </ion-select>\n    </ion-item>\n    </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" >Start !</button>\n        </ion-col>\n    \n      </ion-row>\n      \n    </form>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host\host.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */]]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_game_service_game_service__["a" /* GameServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], HostPage);
     return HostPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=host.js.map
 
 /***/ }),
 
-/***/ 144:
+/***/ 145:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_login_host_login__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_login_host_login__ = __webpack_require__(77);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -252,6 +261,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -259,8 +269,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var RegisterPage = /** @class */ (function () {
-    function RegisterPage(navCtrl, loginServiceProvider, navParams) {
+    function RegisterPage(navCtrl, alertCtrl, loginServiceProvider, navParams) {
         this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
         this.loginServiceProvider = loginServiceProvider;
         this.navParams = navParams;
         this.registerCredentials = { 'userid': '', 'password': '' };
@@ -277,10 +288,24 @@ var RegisterPage = /** @class */ (function () {
         this.loginServiceProvider.register(this.registerCredentials).subscribe(function (resp) {
             console.log(resp);
             if (resp["status"]) {
-                alert("Registered ! Proceed to Login");
+                console.log(resp);
+                var alert_1 = _this.alertCtrl.create({
+                    title: 'Great :) ',
+                    subTitle: resp["message"],
+                    buttons: ['Dismiss']
+                });
+                alert_1.present();
                 _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__host_login_host_login__["a" /* HostLoginPage */], {
                     data: resp
                 });
+            }
+            else {
+                var alert_2 = _this.alertCtrl.create({
+                    title: 'Aiyoh !',
+                    subTitle: resp["message"],
+                    buttons: ['Dismiss']
+                });
+                alert_2.present();
             }
         });
     };
@@ -289,7 +314,7 @@ var RegisterPage = /** @class */ (function () {
             selector: 'page-register',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\register\register.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Register</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="register()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="registerCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Register</button>\n        </ion-col>\n      </ion-row>\n      \n    </form>\n\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\register\register.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], RegisterPage);
     return RegisterPage;
 }());
@@ -298,14 +323,14 @@ var RegisterPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 145:
+/***/ 146:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JoinPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game_game__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game_game__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_game_service_game_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -369,17 +394,17 @@ var JoinPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 146:
+/***/ 147:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GamePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tf_utils_mobilenet__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tensorflow_tfjs_core__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tensorflow_tfjs_core__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_game_service_game_service__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__leader_board_leader_board__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__leader_board_leader_board__ = __webpack_require__(76);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -478,7 +503,7 @@ var GamePage = /** @class */ (function () {
     GamePage.prototype.stopGame = function () {
         var _this = this;
         console.log(this.stream);
-        this.stream.stop();
+        this.stream.getTracks().forEach(function (track) { return track.stop(); });
         this.videoElement.pause();
         this.isRunning = false;
         var alert = this.alertCtrl.create({
@@ -653,14 +678,6 @@ var GamePage = /** @class */ (function () {
             if (this.isMobile()) {
                 navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
                     .then(function (stream) {
-                    stream.stop = function () {
-                        this.getAudioTracks().forEach(function (track) {
-                            track.stop();
-                        });
-                        this.getVideoTracks().forEach(function (track) {
-                            track.stop();
-                        });
-                    };
                     that.stream = stream;
                     // console.log(stream)
                     // console.log(that.videoElement)
@@ -691,15 +708,6 @@ var GamePage = /** @class */ (function () {
             else {
                 navigator.mediaDevices.getUserMedia({ video: true })
                     .then(function (stream) {
-                    stream.stop = function () {
-                        console.log("Stopping the video tracks");
-                        this.getAudioTracks().forEach(function (track) {
-                            track.stop();
-                        });
-                        this.getVideoTracks().forEach(function (track) {
-                            track.stop();
-                        });
-                    };
                     that.stream = stream;
                     // console.log(that.videoElement)
                     that.videoElement['srcObject'] = stream;
@@ -730,20 +738,19 @@ var GamePage = /** @class */ (function () {
     };
     GamePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-game',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\game\game.html"*/'<!--\n  Generated template for the GamePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title><h1 style="display:inline">Hunt Them Down!</h1><ion-buttons end><button ion-button outline id="timer">Estimating..</button><button ion-button outline item-end id="scorer">0 found</button></ion-buttons></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n\n<video autoplay="true" class="camera__element" id="videoelement">\n</video>\n\n<ion-row >\n<button ion-button class="button" [ngClass]="getColor(element.found)" *ngFor="let element of objectslist" >      \n  {{element.label}}</button>\n</ion-row>\n\n\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\game\game.html"*/,
+            selector: 'page-game',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\game\game.html"*/'<!--\n  Generated template for the GamePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title><h1 style="display:inline">Catch em\'!</h1><ion-buttons end>\n <!-- <button ion-button outline id="timer">Estimating..</button> !-->\n    <button ion-button outline item-end id="scorer">0 found</button></ion-buttons></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n\n<video autoplay="true" class="camera__element" id="videoelement">\n</video>\n\n<ion-row >\n<button ion-button class="button" [ngClass]="getColor(element.found)" *ngFor="let element of objectslist" >      \n  {{element.label}}</button>\n</ion-row>\n\n\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\game\game.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_4__providers_game_service_game_service__["a" /* GameServiceProvider */]]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_game_service_game_service__["a" /* GameServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_game_service_game_service__["a" /* GameServiceProvider */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_game_service_game_service__["a" /* GameServiceProvider */]])
     ], GamePage);
     return GamePage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=game.js.map
 
 /***/ }),
 
-/***/ 157:
+/***/ 158:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -756,11 +763,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 157;
+webpackEmptyAsyncContext.id = 158;
 
 /***/ }),
 
-/***/ 199:
+/***/ 200:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -804,56 +811,8 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 199;
+webpackAsyncContext.id = 200;
 module.exports = webpackAsyncContext;
-
-/***/ }),
-
-/***/ 279:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__host_login_host_login__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__join_join__ = __webpack_require__(145);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl) {
-        this.navCtrl = navCtrl;
-    }
-    HomePage.prototype.navigateToPage = function (page) {
-        console.log(page);
-        if (page == "host") {
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__host_login_host_login__["a" /* HostLoginPage */]);
-        }
-        else {
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__join_join__["a" /* JoinPage */]);
-        }
-    };
-    HomePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Catch-It\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button block (click)="navigateToPage(\'host\')">Host</button>\n  <button ion-button block (click)="navigateToPage(\'join\')">Join</button>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\home\home.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
-    ], HomePage);
-    return HomePage;
-}());
-
-//# sourceMappingURL=home.js.map
 
 /***/ }),
 
@@ -878,20 +837,20 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(444);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_host_host__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_host_login_host_login__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_host_live_host_live__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_join_join__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_game_game__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_leader_board_leader_board__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_register_register__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_login_service_login_service__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_host_host__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_host_login_host_login__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_host_live_host_live__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_join_join__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_game_game__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_leader_board_leader_board__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_register_register__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_login_service_login_service__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_game_service_game_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -980,7 +939,7 @@ var AppModule = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MobileNet; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tensorflow_tfjs_core__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tensorflow_tfjs_core__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tensorflow_tfjs_converter__ = __webpack_require__(418);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scavenger_classes__ = __webpack_require__(419);
 /**
@@ -1588,10 +1547,10 @@ var SCAVENGER_CLASSES = {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(66);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1633,7 +1592,7 @@ var MyApp = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1655,6 +1614,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var GameServiceProvider = /** @class */ (function () {
     function GameServiceProvider(http) {
         this.http = http;
+        this.url = "https://catchitbackend.herokuapp.com";
+        //url="http://localhost:3000"
         this.allObjects = ['mobile', 'cup', 'bottle', 'pen', 'cellphone', 'pencil', 'laptop', 'mouse', 'keyboard', 'sunglasses'];
         console.log('Hello GameServiceProvider Provider');
     }
@@ -1663,20 +1624,20 @@ var GameServiceProvider = /** @class */ (function () {
     };
     GameServiceProvider.prototype.startGame = function (gameInfo) {
         console.log(gameInfo);
-        return this.http.post('https://catchitbackend.herokuapp.com/game/', gameInfo);
+        return this.http.post(this.url + '/game/', gameInfo);
     };
     GameServiceProvider.prototype.stopGame = function (game_code) {
         console.log(game_code);
-        return this.http.post("https://catchitbackend.herokuapp.com/stop_game/", { "game_code": game_code });
+        return this.http.post(this.url + "/stop_game/", { "game_code": game_code });
     };
     GameServiceProvider.prototype.getActiveGame = function (playerGameInfo) {
-        return this.http.post("https://catchitbackend.herokuapp.com/get_game/", playerGameInfo);
+        return this.http.post(this.url + "/get_game/", playerGameInfo);
     };
     GameServiceProvider.prototype.getPlayers = function (gameCode) {
-        return this.http.get('https://catchitbackend.herokuapp.com/players/' + gameCode);
+        return this.http.get(this.url + '/players/' + gameCode);
     };
     GameServiceProvider.prototype.putScore = function (playerInfo) {
-        return this.http.post("https://catchitbackend.herokuapp.com/score", playerInfo);
+        return this.http.post(this.url + "/score", playerInfo);
     };
     GameServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
@@ -1689,13 +1650,15 @@ var GameServiceProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 75:
+/***/ 66:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeaderBoardPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__host_login_host_login__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__join_join__ = __webpack_require__(146);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1705,6 +1668,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
+
+
+var HomePage = /** @class */ (function () {
+    function HomePage(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    HomePage.prototype.navigateToPage = function (page) {
+        console.log(page);
+        if (page == "host") {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__host_login_host_login__["a" /* HostLoginPage */]);
+        }
+        else {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__join_join__["a" /* JoinPage */]);
+        }
+    };
+    HomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-home',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Catch-It\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<ion-row class="buttons">\n  <button ion-button block (click)="navigateToPage(\'host\')">Host</button>\n  <button ion-button block (click)="navigateToPage(\'join\')">Join</button>\n  </ion-row>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\home\home.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
+    ], HomePage);
+    return HomePage;
+}());
+
+//# sourceMappingURL=home.js.map
+
+/***/ }),
+
+/***/ 76:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeaderBoardPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(66);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 
 /**
@@ -1719,7 +1730,13 @@ var LeaderBoardPage = /** @class */ (function () {
         this.navParams = navParams;
         this.players = [];
         this.players = this.navParams.get("data");
+        this.players.sort(function (a, b) {
+            return b.score - a.score;
+        });
     }
+    LeaderBoardPage.prototype.gohome = function () {
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
+    };
     LeaderBoardPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad LeaderBoardPage');
     };
@@ -1736,16 +1753,16 @@ var LeaderBoardPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 76:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HostLoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_host__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_register__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__host_host__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_register__ = __webpack_require__(145);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1760,6 +1777,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the HostLoginPage page.
  *
@@ -1767,8 +1785,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var HostLoginPage = /** @class */ (function () {
-    function HostLoginPage(navCtrl, loginServiceProvider, navParams) {
+    function HostLoginPage(navCtrl, alertCtrl, loginServiceProvider, navParams) {
         this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
         this.loginServiceProvider = loginServiceProvider;
         this.navParams = navParams;
         this.loginCredentials = { 'userid': '', 'password': '' };
@@ -1792,14 +1811,22 @@ var HostLoginPage = /** @class */ (function () {
                     data: resp
                 });
             }
+            else {
+                var alert_1 = _this.alertCtrl.create({
+                    title: 'Aiyoh !',
+                    subTitle: resp["message"],
+                    buttons: ['Dismiss']
+                });
+                alert_1.present();
+            }
         });
     };
     HostLoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-host-login',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/'<!--\n  Generated template for the HostLoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="login()" #loginForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="loginCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="loginCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>\n        </ion-col>\n      </ion-row>\n      \n    </form>\n     <button ion-button outline full (click)="regpage()">Register</button>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/,
+            selector: 'page-host-login',template:/*ion-inline-start:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/'<!--\n  Generated template for the HostLoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="login()" #loginForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="userid" name="userid" [(ngModel)]="loginCredentials.userid" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="loginCredentials.password" required pattern=".{6,10}" title="6 to 10 characters"></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>\n        </ion-col>\n      </ion-row>\n      \n    </form>\n     <button ion-button clear full (click)="regpage()">Register</button>\n</ion-content>\n'/*ion-inline-end:"E:\STUDIES\AdvRes\ionic_apps\CatchIt\src\pages\host-login\host-login.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_login_service_login_service__["a" /* LoginServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], HostLoginPage);
     return HostLoginPage;
 }());

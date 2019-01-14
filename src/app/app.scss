@@ -18,6 +18,12 @@
 //     transform: translateX(-50%) translateY(-50%) scale(-1, 1);
 //   }
 
+
+
+// body{
+//   background-image: linear-gradient(to bottom, rgba(0,0,255,0.3), rgba(0,0,255,0.7));
+//   -webkit-background-image: linear-gradient(to bottom, rgba(0,0,255,0.3), rgba(0,0,255,0.7));
+// }
 .camera__element {
   height: 90%;
   min-width: 100%;
@@ -40,3 +46,7 @@
 ::-webkit-scrollbar{
   display:none;
   }
+
+  ion-content {
+    background: $app-background;
+}
